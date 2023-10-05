@@ -1,14 +1,18 @@
 $(document).ready(function () {
     let cpf = $("#cpf");
     cpf.mask('000.000.000-00', { reverse: true });
-
-    // if (cpf.length !== 11 || !validarCPF(cpf)) {
-    //     $("#cpf_label").text("CPF inválido");
-    // } else {
-    //     $("#cpf_label").text("CPF válido");
-    // }
-
+    document.getElementById("cpf").addEventListener("input", function (e) {
+        if (cpf.length !== 11 || !validarCPF(cpf)) {
+            $("#cpf_label").text("CPF inválido");
+            document.getElementById("cadastrar").disabled = true;
+        } else {
+            document.getElementById("cadastrar").disabled = false;
+            $("#cpf_label").text("CPF válido");
+        }
+    });
+  
 });
+
 
 
 document.getElementById("cadastrar").addEventListener("click", function (e) {
@@ -49,30 +53,30 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
     }
 });
 
-// function validarCPF(cpf) {
-//     var soma = 0;
-//     var resto;
-//     if (cpf == "00000000000") return false;
+function validarCPF(cpf) {
+    var soma = 0;
+    var resto;
+    if (cpf == "00000000000") return false;
 
-//     for (var i = 1; i <= 9; i++) {
-//         soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
-//     }
+    for (var i = 1; i <= 9; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
 
-//     resto = (soma * 10) % 11;
+    resto = (soma * 10) % 11;
 
-//     if ((resto == 10) || (resto == 11)) resto = 0;
-//     if (resto != parseInt(cpf.substring(9, 10))) return false;
+    if ((resto == 10) || (resto == 11)) resto = 0;
+    if (resto != parseInt(cpf.substring(9, 10))) return false;
 
-//     soma = 0;
+    soma = 0;
 
-//     for (var i = 1; i <= 10; i++) {
-//         soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
-//     }
+    for (var i = 1; i <= 10; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
 
-//     resto = (soma * 10) % 11;
+    resto = (soma * 10) % 11;
 
-//     if ((resto == 10) || (resto == 11)) resto = 0;
-//     if (resto != parseInt(cpf.substring(10, 11))) return false;
+    if ((resto == 10) || (resto == 11)) resto = 0;
+    if (resto != parseInt(cpf.substring(10, 11))) return false;
 
-//     return true;
-// }
+    return true;
+}
