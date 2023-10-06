@@ -31,7 +31,7 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
         if (cpf.value !== '' && nome.value !== '' && identidade.value !== '' && estadoCivil !== '') {
             $.ajax({
                 type: "POST",
-                url: "cadastrar.php",
+                url: "php/cadastrar.php",
                 data: {
                     cpf: cpf.value,
                     nome: nome.value,
@@ -42,8 +42,9 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
                     document.getElementById("cadastrar").disabled = true;
                     $("#resultado").html("ENVIANDO...");
                 },
-                success: function () {
-                    alert("Dados salvo com sucesso!");
+                success: function (data) {
+                    alert("Dados salvos com sucesso!");
+                    alert(data.mensagem+' '+data.valor);
                     $("#cpf").val("");
                     $("#nome").val("");
                     $("#identidade").val("");
