@@ -1,18 +1,22 @@
 $(document).ready(function () {
     let cpf = $("#cpf");
     cpf.mask('000.000.000-00', { reverse: true });
-    document.getElementById("cpf").addEventListener("input", function (e) {
-        if (cpf.length !== 11 || !validarCPF(cpf)) {
-            $("#cpf_label").text("CPF inválido");
-            document.getElementById("cadastrar").disabled = true;
+   
+    $('#cpf').on('input', function () {
+        const cpf = $(this).val();
+        const valido = validarCPF(cpf);
+
+        if (valido && cpf !== "") {
+            $('#cpfStatus').text('CPF válido').removeClass('alert alert-danger').addClass('alert alert-success p-2 mt-2');
+            $('#cadastrar').prop("disabled", false);
+        } else if(cpf !== "") {
+            $('#cpfStatus').text('CPF inválido').removeClass('alert alert-success').addClass('alert alert-danger p-2 mt-2');
+            $('#cadastrar').prop("disabled", true);
         } else {
-            document.getElementById("cadastrar").disabled = false;
-            $("#cpf_label").text("CPF válido");
+            $('#cpfStatus').text('').removeClass('alert alert-success alert-danger');
         }
     });
-  
 });
-
 
 
 document.getElementById("cadastrar").addEventListener("click", function (e) {
@@ -40,6 +44,10 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
                 },
                 success: function () {
                     alert("Dados salvo com sucesso!");
+                    $("#cpf").val("");
+                    $("#nome").val("");
+                    $("#identidade").val("");
+                    $('#cpfStatus').text('').removeClass('alert alert-success alert-danger');
                     document.getElementById("cadastrar").disabled = false;
                 },
                 error: function () {
@@ -53,30 +61,45 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
     }
 });
 
+
 function validarCPF(cpf) {
-    var soma = 0;
-    var resto;
-    if (cpf == "00000000000") return false;
+    cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
 
-    for (var i = 1; i <= 9; i++) {
-        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    if (cpf === '' || cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+        return false; // CPF inválido
     }
 
-    resto = (soma * 10) % 11;
-
-    if ((resto == 10) || (resto == 11)) resto = 0;
-    if (resto != parseInt(cpf.substring(9, 10))) return false;
-
-    soma = 0;
-
-    for (var i = 1; i <= 10; i++) {
-        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    let add = 0;
+    for (let i = 0; i < 9; i++) {
+        add += parseInt(cpf.charAt(i)) * (10 - i);
     }
 
-    resto = (soma * 10) % 11;
+    let rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) {
+        rev = 0;
+    }
 
-    if ((resto == 10) || (resto == 11)) resto = 0;
-    if (resto != parseInt(cpf.substring(10, 11))) return false;
+    if (rev !== parseInt(cpf.charAt(9))) {
+        return false; // CPF inválido
+    }
 
-    return true;
+    add = 0;
+    for (let i = 0; i < 10; i++) {
+        add += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+
+    rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) {
+        rev = 0;
+    }
+
+    if (rev !== parseInt(cpf.charAt(10))) {
+        return false; // CPF inválido
+    }
+
+    return true; // CPF válido
 }
+
+
+
+
