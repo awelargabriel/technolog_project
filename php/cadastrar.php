@@ -5,16 +5,16 @@
     $estadoCivil = $_POST["estadoCivil"];
     $cpf = str_replace(".", "", $cpf);
     $cpf = str_replace("-", "", $cpf);
-    $arquivo = fopen("../arquivos/" . $cpf . '.txt', "a+");
     $dataAcao = date("d-m-Y H:i:s");
-    $conteudo = $nome . "_" . $cpf . "_" . $identidade . "_" . $estadoCivil . "_*_" . $dataAcao . "\n";
-if(fwrite($arquivo, $conteudo)){
-    $response["success_arquivo"] = 1;
-    $response["user"] = $nome;
-} else {
-    $response["success_arquivo"] = 0;
-    $response["user"] = $nome;
-}
+//     $arquivo = fopen("../arquivos/" . $cpf . '.txt', "a+");
+//     $conteudo = $nome . "_" . $cpf . "_" . $identidade . "_" . $estadoCivil . "_*_" . $dataAcao . "\n";
+// if(fwrite($arquivo, $conteudo)){
+//     $response["success_arquivo"] = 1;
+//     $response["user"] = $nome;
+// } else {
+//     $response["success_arquivo"] = 0;
+//     $response["user"] = $nome;
+// }
 
 
 
@@ -35,9 +35,10 @@ $query = "Insert into usuarios (cpf, nome, identidade, estado_civil, data_acao)
             Values( '".$cpf."','".$nome."','".$identidade."','".$estadoCivil."','".$dataAcao."')";
 // echo $query;
 if(mysqli_query($connect,$query)){
-    $response["success_bd"] ="Registro inserido no banco de dados com sucesso";
+    $response["success"] = 1;
+    $response["user"] = $nome;
 } else {
-    $response["success_bd"] = "Error: ". $query ."<br>".mysqli_error($connect); 
+    $response["success"] = "Error: ". $query ."<br>".mysqli_error($connect); 
 }
 
 mysqli_close($connect);

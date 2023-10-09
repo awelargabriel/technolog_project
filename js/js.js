@@ -42,11 +42,9 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
                     document.getElementById("cadastrar").disabled = true;
                 },
                 success: function (response) {
-                    alert(response);
                     response = JSON.parse(response);
-                    if(response.success_arquivo == 1){
-                        alert(response.user + " cadastrado(a) com sucesso no arquivo!");
-                        alert(response.success_bd);
+                    if(response.success == 1){
+                        alert(response.user + " cadastrado(a) com sucesso!");
                     } else {
                         alert("Erro ao salvar os dados no arquivo");
                         alert(response.success_bd);
