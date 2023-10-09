@@ -40,11 +40,17 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
                 },
                 beforeSend: function () {
                     document.getElementById("cadastrar").disabled = true;
-                    $("#resultado").html("ENVIANDO...");
                 },
-                success: function (data) {
-                    alert("Dados salvos com sucesso!");
-                    alert(data.mensagem+' '+data.valor);
+                success: function (response) {
+                    alert(response);
+                    response = JSON.parse(response);
+                    if(response.success_arquivo == 1){
+                        alert(response.user + " cadastrado(a) com sucesso no arquivo!");
+                        alert(response.success_bd);
+                    } else {
+                        alert("Erro ao salvar os dados no arquivo");
+                        alert(response.success_bd);
+                    }
                     $("#cpf").val("");
                     $("#nome").val("");
                     $("#identidade").val("");

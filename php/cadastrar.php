@@ -1,5 +1,4 @@
 <?php
-    var_dump($_POST);
     $cpf = $_POST["cpf"];
     $nome = $_POST["nome"];
     $identidade = $_POST["identidade"];
@@ -9,15 +8,22 @@
     $arquivo = fopen("../arquivos/" . $cpf . '.txt', "a+");
     $dataAcao = date("d-m-Y H:i:s");
     $conteudo = $nome . "_" . $cpf . "_" . $identidade . "_" . $estadoCivil . "_*_" . $dataAcao . "\n";
-fwrite($arquivo, $conteudo);
+if(fwrite($arquivo, $conteudo)){
+    $response["success_arquivo"] = 1;
+    $response["user"] = $nome;
+} else {
+    $response["success_arquivo"] = 0;
+    $response["user"] = $nome;
+}
 
 
 
-$host = "fdb1019.awardspace.net";
+
+$host = "127.0.0.1";
 $porta = "3306";
 $bd = "2594716_cadastro";
-$user = "2594716_cadastro";
-$password = "Gabriel2023@";
+$user = "root";
+$password = "";
 
 $connect =  mysqli_connect($host,$user,$password,$bd,$porta);
 
@@ -29,11 +35,12 @@ $query = "Insert into usuarios (cpf, nome, identidade, estado_civil, data_acao)
             Values( '".$cpf."','".$nome."','".$identidade."','".$estadoCivil."','".$dataAcao."')";
 // echo $query;
 if(mysqli_query($connect,$query)){
-    echo "Registro inserido com sucesso";
+    $response["success_bd"] ="Registro inserido no banco de dados com sucesso";
 } else {
-    echo "Error: ". $query ."<br>".mysqli_error($connect); 
+    $response["success_bd"] = "Error: ". $query ."<br>".mysqli_error($connect); 
 }
 
 mysqli_close($connect);
+echo (json_encode($response));
 
 ?>
