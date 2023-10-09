@@ -1,3 +1,13 @@
+/**  Cabeçalho de documentação:
+	
+	 * Empresa : Tecnolog
+  	 * Autor : Gabriel Avelar 
+	 * Descrição : Atividade #9978. Criação do banco de dados usuarios e Integração do formulário de cadastro com o banco de dados criado
+ 	 * Data criação: 09/10/2023
+	 * Diretório : https://cp1.awardspace.net/file-manager/9978/
+             * Última atualização: Gabriel Avelar / 06/10/2023 / Atividade #9977 de integração Criação de formulário de cadastro e salvamento dos dados em arquivo 
+	 */ 
+
 $(document).ready(function () {
     let cpf = $("#cpf");
     cpf.mask('000.000.000-00', { reverse: true });
@@ -27,7 +37,6 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
         let identidade = document.getElementById("identidade");
         let estadoCivil = document.getElementById("estado_civil");
 
-        console.log(cpf.value);
         if (cpf.value !== '' && nome.value !== '' && identidade.value !== '' && estadoCivil !== '') {
             $.ajax({
                 type: "POST",
