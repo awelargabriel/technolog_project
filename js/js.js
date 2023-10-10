@@ -76,6 +76,9 @@ document.getElementById("cadastrar").addEventListener("click", function (e) {
 });
 
 
+
+
+
 function validarCPF(cpf) {
     cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
 

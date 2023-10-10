@@ -5,4 +5,4 @@
     define('DB', '2594716_cadastro');
     define('PORT', '3306');
 
-$conn = new mysqli(HOST,USER,PASS,DB,PORT);  
+$connection = new mysqli(HOST,USER,PASS,DB,PORT);  
