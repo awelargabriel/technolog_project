@@ -63,7 +63,7 @@
 
 
 
-
+require("config.php");
 $cpf = $_POST["cpf"];
 $nome = $_POST["nome"];
 $identidade = $_POST["identidade"];
@@ -73,38 +73,28 @@ $cpf = str_replace("-", "", $cpf);
 $dataAcao = date("d-m-Y H:i:s");
 
 
-$host = "127.0.0.1";
-$porta = "3306";
-$bd = "2594716_cadastro";
-$user = "root";
-$password = "";
 
-$connect = mysqli_connect($host, $user, $password, $bd, $porta);
 
-if (!$connect) {
-    die("Erro na conexão: " . mysqli_connect_error());
-}
 $querySelect = "select * from usuarios
                 where cpf = '" . $cpf . "'";
 
 $query = "Insert into usuarios (cpf, nome, identidade, estado_civil, data_acao)
                 Values( '" . $cpf . "','" . $nome . "','" . $identidade . "','" . $estadoCivil . "','" . $dataAcao . "')";
 
-$result = mysqli_query($connect, $querySelect);
+$result = $connection->query($querySelect);
 
 if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        if ($cpf == $row['cpf']) {
+    while ($row = $result->fetch_object()) {
+        if ($cpf == $row->cpf) {
             $query = "Insert into usuarios (cpf, nome, identidade, estado_civil, data_acao)
-                Values( '" . $cpf . "','" . $row['nome'] . "','" . $row['identidade'] . "','" . $row['estado_civil'] . "','" . $dataAcao . "')";
-            if (mysqli_query($connect, $query)) {
+                Values( '" . $cpf . "','" . $row->nome . "','" . $row->identidade . "','" . $row->estado_civil . "','" . $dataAcao . "')";
+            if ($connection->query($query)) {
                 $response["success"] = 1;
-                $response["user"] = $row['nome'];
-                mysqli_close($connect);
+                $response["user"] = $row->nome;
                 echo (json_encode($response));
                 die;
             } else {
-                $response["success"] = "Error: " . $query . "<br>" . mysqli_error($connect);
+                $response["success"] = "Error: " . $query . "<br>" . $connection->connect_error;
                 echo (json_encode($response));
                 die;
             }
@@ -114,14 +104,14 @@ if ($result) {
 
 
 
-if (mysqli_query($connect, $query)) {
+if ($connection->query($query)) {
     $response["success"] = 1;
     $response["user"] = $nome;
 } else {
-    $response["success"] = "Error: " . $query . "<br>" . mysqli_error($connect);
+    $response["success"] = "Error: " . $query . "<br>" . $connection->connect_error;
 }
 
-mysqli_close($connect);
+
 echo (json_encode($response));
 
 ?>

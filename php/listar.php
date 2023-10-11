@@ -25,16 +25,18 @@
             print "<tbody>";
                 print "<tr>";
                     // print "<td scope='row'>".$row->id."</td>";
-                    print "<td>".$row->cpf."</td>";
-                    print "<td>".$row->nome."</td>";
-                    print "<td>".$row->identidade."</td>";
-                    print "<td>".$row->estado_civil."</td>";
-                    print "<td>".$row->data_acao."</td>";
+                    print "<td contenteditable='false'>".$row->cpf."</td>";
+                    print "<td contenteditable='false'>".$row->nome."</td>";
+                    print "<td contenteditable='false'>".$row->identidade."</td>";
+                    print "<td contenteditable='false'>".$row->estado_civil."</td>";
+                    print "<td contenteditable='false'>".$row->data_acao."</td>";
                     print "<td class='text-center'>
 
                                 <button class='btn btn-success editar'data-id='".$row->cpf."'>Editar</button>
+                                <button class='btn btn-success salvar'data-id='".$row->cpf."'>Salvar</button>
+                                <button  class='btn btn-danger cancelar'>Cancelar</button>
 
-                                <button class='btn btn-warning ativado' data-id='".$row->cpf."'>Desativar</button>
+                                <button class='btn btn-warning m-1 ativado' data-id='".$row->cpf."'>Desativar</button>
 
                                 <button class='btn btn-danger excluir' data-id='".$row->cpf."'>Excluir</button>
                                 

@@ -7,28 +7,7 @@
 	 * Diretório : https://cp1.awardspace.net/file-manager/9978/
      * Última atualização: Gabriel Avelar / 06/10/2023 / Atividade #9977 de integração Criação de formulário de cadastro e salvamento dos dados em arquivo 
 	 */ -->
-<!doctype html>
-<html lang="en">
 
-<head>
-    
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> 
-
-    <!-- JQUERY JS
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script> -->
-
-    <title>Formulário</title>
-</head>
-
-<body>
     
     <h2 class="mt-3 text-center">Formulário de Cadastro</h2>
     <div class="container">
@@ -62,27 +41,4 @@
             </div>
         </form>
     </div>
-    <!-- <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Tem certeza que deseja salvar esses dados?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-primary">Confirmar</button>
-          </div>
-        </div>
-    </div> -->
     <script src="js/js.js"></script>
-</body>
-
-
-
-
-</html>

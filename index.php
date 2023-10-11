@@ -51,13 +51,13 @@
                     require("php/config.php");
                     switch(@$_REQUEST["page"]){
                         case "novo":
-                            include("index.html");
+                            include("php/cadastro.php");
                         break;
                         case "listar":
                             include("php/listar.php");
                         break;
                         default:
-                            print "<h1> Bem vindos!<h1>";
+                           include("php/listar.php");
                     }
                 ?>
             </div>
